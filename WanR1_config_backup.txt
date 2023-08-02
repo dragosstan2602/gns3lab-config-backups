@@ -1,0 +1,181 @@
+Building configuration...
+
+Current configuration : 2251 bytes
+!
+! Last configuration change at 09:36:51 UTC Wed Aug 2 2023
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname WanR1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$RaYp$mwo8xwt9kFyk4DPiQ9hZb.
+!
+no aaa new-model
+!
+!
+!
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name home.lan
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+username dragos privilege 15 password 0 cisco
+!
+redundancy
+!
+lldp run
+no cdp log mismatch duplex
+!
+ip tcp synwait-time 5
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback100
+ description mgmt_interface
+ ip address 10.255.0.1 255.255.255.255
+!
+interface Ethernet0/0
+ ip address 192.168.0.221 255.255.255.0
+!
+interface Ethernet0/1
+ description CoreR1
+ ip address 10.0.0.1 255.255.255.252
+ bfd interval 500 min_rx 500 multiplier 3
+!
+interface Ethernet0/2
+ description CoreR2
+ ip address 10.0.0.5 255.255.255.252
+ bfd interval 500 min_rx 500 multiplier 3
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+!
+router bgp 65001
+ bgp log-neighbor-changes
+ network 0.0.0.0
+ network 10.255.0.1 mask 255.255.255.255
+ neighbor 10.0.0.2 remote-as 65010
+ neighbor 10.0.0.2 fall-over bfd
+ neighbor 10.0.0.6 remote-as 65010
+ neighbor 10.0.0.6 fall-over bfd
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 192.168.0.1
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end
