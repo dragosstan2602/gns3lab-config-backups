@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 3467 bytes
+Current configuration : 3491 bytes
 !
-! Last configuration change at 09:40:55 UTC Fri Aug 4 2023
+! Last configuration change at 09:43:05 UTC Fri Aug 4 2023
 !
 version 15.5
 service timestamps debug datetime msec
@@ -105,6 +105,7 @@ interface Ethernet0/2
  ip address 10.0.0.21 255.255.255.252
 !
 interface Ethernet0/3
+ description ADMIN_DOWN
  no ip address
  shutdown
 !
