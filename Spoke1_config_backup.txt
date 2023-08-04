@@ -1,6 +1,6 @@
 Building configuration...
 
-Current configuration : 3491 bytes
+Current configuration : 3515 bytes
 !
 ! Last configuration change at 09:43:05 UTC Fri Aug 4 2023
 !
@@ -110,6 +110,7 @@ interface Ethernet0/3
  shutdown
 !
 interface Ethernet1/0
+ description ADMIN_DOWN
  no ip address
  shutdown
 !
