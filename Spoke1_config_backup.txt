@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 3495 bytes
+Current configuration : 3467 bytes
 !
-! Last configuration change at 09:20:26 UTC Fri Aug 4 2023
+! Last configuration change at 09:40:55 UTC Fri Aug 4 2023
 !
 version 15.5
 service timestamps debug datetime msec
@@ -172,8 +172,6 @@ ip prefix-list pl_mgmt_ips seq 10 permit 10.255.0.0/16 le 32
 ip sla 100
  icmp-echo 10.0.0.13 source-ip 10.0.0.14
 ip sla schedule 100 life forever start-time now
-!
-route-map TEST permit 100
 !
 route-map rm_wan_secondary_out permit 10
  match ip address prefix-list pl_lan_subnets
